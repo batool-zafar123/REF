@@ -35,50 +35,92 @@
 
 
 def main():
-    p = int(input("How many equations? "))
-    n = int(input("How many unknowns? "))
-    matrix = []
-    print()
-    for i in range(p):
-        row = []
-        for j in range(n):
-            row.append(float(input(f"Enter entry # {i+1}{j+1}: ")))
-        matrix.append(row)
-        print()
+    # p = int(input("How many equations? "))
+    # n = int(input("How many unknowns? "))
+    # matrix = []
+    # print()
+    # for i in range(p):
+    #     row = []
+    #     for j in range(n):
+    #         row.append(float(input(f"Enter entry # {i+1}{j+1}: ")))
+    #     matrix.append(row)
+    #     print()
     # display(matrix)
 
-    # matrix = [[1, 1, 1, 5],
-    #           [1, 2, 0, 3],
-    #           [2, 1, 3, 9],
-    #           [2, 4, -5, 0]]
-    # print(matrix)
-    # REF(matrix, 4, 4)
-    # print(matrix)
+    matrix1 = [[1, 2, 3],
+               [4, 2, 1],
+               [1, 4, 3]]
+    
+    matrix2 = [[3, -1, 2, 5],
+               [4, 0, 7, 2],
+               [2, 1, -1, 3]]
+    
+    matrix3 = [[4, 2, 3],
+               [-3, 0, 5],
+               [0, 4, 6],
+               [3, 2, 1]]
+
+    display(matrix1)
+    REF(matrix1, 3, 3)
+    display(matrix1)
+    REF_1(matrix1, 3, 3)
+    display(matrix1)
+
+    display(matrix2)
+    REF(matrix2, 3, 4)
+    display(matrix2)
+    REF_1(matrix2, 3, 4)
+    display(matrix2)
+
+    display(matrix3)
+    REF(matrix3, 4, 3)
+    display(matrix3)
+    REF_1(matrix3, 4, 3)
+    display(matrix3)
+
 
 
 def REF(matrix, p, n):
     try:
-        for i in range(p-1):
-            for j in range(i, n-1):
-                if not matrix[i][i] == 0:
-                    mult = matrix[j+1][i]/matrix[i][i]
-                    matrix[j+1] = [a - (mult)*b for a, b in zip(matrix[j+1], matrix[i])]
+        for i in range(n):
+
+            for j in range(i+1, p):
+
+                mult = matrix[j][i] / matrix[i][i]
+
+                matrix[j] = [a - mult * b for a, b in zip(matrix[j], matrix[i])]
+
+            # display(matrix)
+
     except ZeroDivisionError:
+        print("Division with Zero!")
         return
+    
+
+
+def REF_1(matrix, p, n):
+    if p > n:
+        p = n
+    for i in range(p):
+        matrix[i] = [x / matrix[i][i] for x in matrix[i]]
+
+
 
 # Display function not completed yet...
-# def display(matrix):
-#     rows = len(matrix)
-#     columns = len(matrix[0])
-#     print("[", end = "")
-#     for i in range(rows):
-#         print("[", end = "")
-#         for j in range(columns):
-#             print(matrix[i][j], end = "  ")
-#         print("]", end = "")
-#         if not j == columns:
-#             print()
-#     print("]", end = "")
+def display(matrix):
+    r = len(matrix)
+    c = len(matrix[0])
+    for i in range(r):
+        print("[ ", end = "") if i == 0 else print("  ", end = "")
+        for j in range(c):
+            if not j == c-1:
+                print(f"{matrix[i][j]:.4f}", "   ", end = "") 
+            else:
+                print(f"{matrix[i][j]:.4f}", "", end = "")
+        print("]") if i == r-1 else print()
+    print()
+    
+
 
 
 main()
