@@ -1,39 +1,3 @@
-# matrix = [[1, 2, 3], [6, 8, 2], [1, 0, 1]]
-# i = 0
-# j = 0
-# n = 3
-
-# # working fine for first column
-# for j in range(1):
-#     i = 0
-#     pivot = matrix[i][j] # set the pivot
-#     pivot_row = i
-#     while pivot == 0 and i != n: # if it's 0 then 
-#         i = i + 1 # move to the next row
-#         pivot_row = i
-#         pivot = matrix[i][j] # set the element as pivot 
-#     if i==n:
-#         continue
-#     if pivot != 1:
-#         for _ in matrix[i]: # for each element in the row.
-#             matrix[i][j] = matrix[i][j] / pivot # divide it by the pivot
-#     i = i + 1 # move to the next row
-#     if i == n:
-#         continue
-#     while matrix[i][j] == 0 and i != n: # while the element is not zero.
-#         i = i + 1
-#     if i==n:
-#         continue
-#     while i < n:
-#         if matrix[i][j] != 0:
-#             for j in range(n):
-#                 matrix[i][j] = matrix[i][j] - (matrix[i][j] * matrix[pivot_row][j])
-#         i = i + 1
-#         j = 0
-
-# print(matrix)
-
-
 def main():
     # p = int(input("How many equations? "))
     # n = int(input("How many unknowns? "))
@@ -59,26 +23,28 @@ def main():
                [-3, 0, 5],
                [0, 4, 6],
                [3, 2, 1]]
+    
 
-    display(matrix1)
-    REF(matrix1, 3, 3)
-    display(matrix1)
-    REF_1(matrix1, 3, 3)
-    display(matrix1)
+    # display(matrix1)
+    # REF(matrix1, 3, 3)
+    # display(matrix1)
+    # REF_1(matrix1, 3, 3)
+    # display(matrix1)
 
-    display(matrix2)
-    REF(matrix2, 3, 4)
-    display(matrix2)
-    REF_1(matrix2, 3, 4)
-    display(matrix2)
+    # display(matrix2)
+    # REF(matrix2, 3, 4)
+    # display(matrix2)
+    # REF_1(matrix2, 3, 4)
+    # display(matrix2)
 
-    display(matrix3)
-    REF(matrix3, 4, 3)
-    display(matrix3)
-    REF_1(matrix3, 4, 3)
-    display(matrix3)
-
-
+    # display(matrix3)
+    # REF(matrix3, 4, 3)
+    # display(matrix3)
+    # REF_1(matrix3, 4, 3)
+    # display(matrix3)
+    REF_2(matrix1, 3, 3)
+    REF_2(matrix2, 3, 4)
+    REF_2(matrix3, 4, 3)
 
 def REF(matrix, p, n):
     try:
@@ -103,6 +69,32 @@ def REF_1(matrix, p, n):
         p = n
     for i in range(p):
         matrix[i] = [x / matrix[i][i] for x in matrix[i]]
+
+def REF_2(matrix, rows, columns):
+    pivot_row = 0
+    for i in range(columns): 
+        # Finding Pivot
+        search_row = pivot_row
+        pivot = matrix[pivot_row][i]
+        while pivot == 0:
+            search_row += 1
+            if search_row == rows:
+                break  # No pivot found
+            pivot = matrix[search_row][i]
+
+        if search_row != pivot_row and search_row < rows:
+            matrix[pivot_row], matrix[search_row] = matrix[search_row], matrix[pivot_row] 
+        if pivot != 0:
+            # Eliminating enteries below pivot
+            for j in range(pivot_row + 1, rows):
+                mult = matrix[j][i] / pivot
+                matrix[j] = [a - mult * b for a, b in zip(matrix[j], matrix[pivot_row])]
+         
+            pivot_row += 1
+            if pivot_row == rows:
+                break
+    print(matrix)
+
 
 
 
