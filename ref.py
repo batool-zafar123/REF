@@ -106,6 +106,25 @@ def REF_1(matrix, p, n):
     for i in range(p):
         if not matrix[i][i] == 0:
             matrix[i] = [x / matrix[i][i] for x in matrix[i]]
+def REF_1(matrix, rows, columns):
+    pivot_row = 0
+    for i in range(columns): 
+        # Finding Pivot
+        search_row = pivot_row
+        pivot = matrix[pivot_row][i]
+        while pivot == 0:
+            search_row += 1
+            if search_row == rows:
+                break  # No pivot found
+            pivot = matrix[search_row][i]
+
+        if pivot != 0:
+            matrix[pivot_row] = [x / pivot for x in matrix[pivot_row]]
+        else:
+            continue
+        pivot_row += 1
+        if pivot_row == rows:
+            break
 
 
 
