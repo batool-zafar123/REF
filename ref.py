@@ -1,134 +1,57 @@
 def main():
-    # INPUT from user--->
-    # p = int(input("How many equations? "))
-    # n = int(input("How many unknowns? "))
-    # matrix = []
-    # print()
-    # for i in range(p):
-    #     row = []
-    #     for j in range(n):
-    #         row.append(float(input(f"Enter entry # {i+1}{j+1}: ")))
-    #     matrix.append(row)
-    #     print()
-    # display(matrix)
 
+    # matrix = matrix_input()
+    
     matrix1 = [[6, 1, 1, 1, 0, 0],
                [4, -2, 5, 0, 1, 0],
                [2, 8, 7, 0, 0, 1]]
     
-    # matrix2 = [[3, -1, 2, 5],
-    #            [4, 0, 7, 2],
-    #            [2, 1, -1, 3]]
-
-    # matrix3 = [[1, 5, 8, 2],
-    #            [-5, 3, 0, -7],
-    #            [3, 4, 7, -1],
-    #            [2, 1, 5, -3],
-    #            [3, -8, 0, 3]]
+    system(matrix1)
     
-    # matrix4 = [[1, 2, -1, -4],
-    #            [2, 3, -1, -11],
-    #            [-2, 0, -3, 22]]
-
-    # matrix5 = [[4, 2, 3],
-    #            [8, 4, 6],
-    #            [12, 6, 9],
-    #            [3, 2, 1]]
+    matrix2 = [[3, -1, 2, 5],
+               [4, 0, 7, 2],
+               [2, 1, -1, 3]]
     
+    system(matrix2)
 
-    display(matrix1)
-    REF(matrix1, 3, 6)
-    REF_1(matrix1, 3, 6)
-    display(matrix1)
-    RREF(matrix1, 3, 6)
-    display(matrix1)
-
-    # display(matrix2)
-    # REF(matrix2, 3, 4)
-    # REF_1(matrix2, 3, 4)
-    # display(matrix2)
-
-    # display(matrix3)
-    # REF_(matrix3, 5, 4)
-    # REF_1(matrix3, 5, 4)
-    # display(matrix3)
-    # RREF(matrix3, 5, 4)
-    # display(matrix3)
-
-    # display(matrix4)
-    # REF(matrix4, 3, 3)
-    # REF_1(matrix4, 3, 3)
-    # display(matrix4)
-    # RREF(matrix4, 3, 3)
-    # display(matrix4)
-
-    # display(matrix5)
-    # REF(matrix5, 4, 3)
-    # REF_1(matrix5, 4, 3)
-    # display(matrix5)
-    # RREF(matrix5, 4, 3)
-    # display(matrix5)
-
-    # matrix = [[1, 0, 0, -1],
-    #           [0, 0, 0, 1],
-    #           [0, 0, 0, 0]]
+    matrix3 = [[1, 5, 8, 2],
+               [-5, 3, 0, -7],
+               [3, 4, 7, -1],
+               [2, 1, 5, -3],
+               [3, -8, 0, 3]]
     
-    # display(matrix)
-    # REF(matrix, 3, 4)
-    # REF_1(matrix, 3, 4)
-    # display(matrix)
-    # RREF(matrix, 3, 4)
-    # display(matrix)
-
-
-
-def REF_(matrix, p, n):
-    try:
-        for i in range(n):
-
-            for j in range(i+1, p):
-
-                mult = matrix[j][i] / matrix[i][i]
-
-                matrix[j] = [a - mult * b for a, b in zip(matrix[j], matrix[i])]
-
-            display(matrix)
-
-    except ZeroDivisionError:
-        print("Division with Zero!")
-        return
+    system(matrix3)
     
+    matrix4 = [[1, 2, -1, -4],
+               [2, 3, -1, -11],
+               [-2, 0, -3, 22]]
+    
+    system(matrix4)
+
+    matrix5 = [[4, 2, 3],
+               [8, 4, 6],
+               [12, 6, 9],
+               [3, 2, 1]]
+    
+    system(matrix5)
+
+    matrix6 = [[1, 2, -1, 1, 1, 3, -6],
+               [2, 5, -1, 2, 2, 7, -13],
+               [-1, 1, 4, -2, 1, -1, 11],
+               [3, -1, 2, 5, -2, 1, 0],
+               [1, 0, 1, 0, 4, -2, 19],
+               [0, 2, -3, 1, 1, 5, -15]]
+    
+    system(matrix6)
+    
+    matrix7 = []
+
+    system(matrix7)
 
 
-def REF_1(matrix, p, n):
-    if p > n:
-        p = n
-    for i in range(p):
-        if not matrix[i][i] == 0:
-            matrix[i] = [x / matrix[i][i] for x in matrix[i]]
-def REF_1(matrix, rows, columns):
-    pivot_row = 0
-    for i in range(columns): 
-        # Finding Pivot
-        search_row = pivot_row
-        pivot = matrix[pivot_row][i]
-        while pivot == 0:
-            search_row += 1
-            if search_row == rows:
-                break  # No pivot found
-            pivot = matrix[search_row][i]
-
-        if pivot != 0:
-            matrix[pivot_row] = [x / pivot for x in matrix[pivot_row]]
-        else:
-            continue
-        pivot_row += 1
-        if pivot_row == rows:
-            break
-
-
-
-def REF(matrix, rows, columns):
+def REF(matrix):
+    rows = len(matrix)
+    columns = len(matrix[0])
     pivot_row = 0
     for i in range(columns): 
         # Finding Pivot
@@ -153,26 +76,86 @@ def REF(matrix, rows, columns):
                 break
 
 
+def REF_1(matrix):
+    rows = len(matrix)
+    columns = len(matrix[0])
+    pivot_row = 0
+    for i in range(columns): 
+        # Finding Pivot
+        search_row = pivot_row
+        pivot = matrix[pivot_row][i]
+        while pivot == 0:
+            search_row += 1
+            if search_row == rows:
+                break  # No pivot found
+            pivot = matrix[search_row][i]
 
-def RREF(matrix, p, n):
+        if pivot != 0:
+            matrix[pivot_row] = [x / pivot for x in matrix[pivot_row]]
+        else:
+            continue
+        pivot_row += 1
+        if pivot_row == rows:
+            break
+
+
+def RREF(matrix):
+    p = len(matrix)
+    n = len(matrix[0])
     
     for i in range(p-1, -1, -1):
+        pivot_column = -1
         for k in range(n):
             if abs(matrix[i][k]) > 1e-9:
                 pivot_column = k
                 break
+        if pivot_column == -1:
+            continue
 
         for j in range(i-1, -1, -1):
 
             mult = matrix[j][pivot_column]
             matrix[j] = [a - mult * b for a, b in zip(matrix[j], matrix[i])]
-                    
+                
+
+def system(matrix):
+    print("Original Matrix: ")
+    display(matrix)
+    REF(matrix)
+    REF_1(matrix)
+    RREF(matrix)
+    print("RREF Matrix:")
+    display(matrix)
+
+    if check_consistent(matrix):
+        print("System is consistent.\n")
+        non_zero_rows = 0
+        for row in matrix:
+            if not all(abs(x) < 1e-9 for x in row):
+                non_zero_rows += 1
+        
+        num_vars = len(matrix[0]) - 1
+        if non_zero_rows == num_vars:
+            for i in range(len(matrix[0])-1):
+                print(f"The variable X{i+1} = {matrix[i][-1]:.4f}.")
+            print()
+        else:
+            print("The system has infinite many solutions. (Logic Pending)\n")
+    else:
+        print("System is inconsistent. Solution not possible.\n")
+
+
+def check_consistent(matrix):
+    rows = len(matrix)
+    for i in range(rows):
+        if all(abs(x) < 1e-9 for x in matrix[i][:-1]) and abs(matrix[i][-1]) > 1e-9:
+            return False
+    return True
 
 
 def display(matrix):
     r = len(matrix)
     c = len(matrix[0])
-    zero_abs(matrix, r, c)
     for i in range(r):
         print("[ ", end = "") if i == 0 else print("  ", end = "")
         for j in range(c):
@@ -186,12 +169,19 @@ def display(matrix):
     print()
 
 
-
-def zero_abs(matrix, r, c):
-    for i in range(r):
-        for j  in range(c):
-            if matrix[i][j] == 0:
-                matrix[i][j] = 0.0
+def matrix_input():
+    # INPUT from user--->
+    p = int(input("How many equations? "))
+    n = int(input("How many unknowns? "))
+    matrix = []
+    print()
+    for i in range(p):
+        row = []
+        for j in range(n):
+            row.append(float(input(f"Enter entry # {i+1}{j+1}: ")))
+        matrix.append(row)
+        print()
+    return matrix
 
 
 
