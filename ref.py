@@ -1,52 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 def main():
 
-    # matrix = matrix_input()
+    matrix = matrix_input()
     
-    matrix1 = [[6, 1, 1, 1, 0, 0],
-               [4, -2, 5, 0, 1, 0],
-               [2, 8, 7, 0, 0, 1]]
-    
-    system(matrix1)
-    
-    matrix2 = [[3, -1, 2, 5],
-               [4, 0, 7, 2],
-               [2, 1, -1, 3]]
-    
-    system(matrix2)
-
-    matrix3 = [[1, 5, 8, 2],
-               [-5, 3, 0, -7],
-               [3, 4, 7, -1],
-               [2, 1, 5, -3],
-               [3, -8, 0, 3]]
-    
-    system(matrix3)
-    
-    matrix4 = [[1, 2, -1, -4],
-               [2, 3, -1, -11],
-               [-2, 0, -3, 22]]
-    
-    system(matrix4)
-
-    matrix5 = [[4, 2, 3],
-               [8, 4, 6],
-               [12, 6, 9],
-               [3, 2, 1]]
-    
-    system(matrix5)
-
-    matrix6 = [[1, 2, -1, 1, 1, 3, -6],
-               [2, 5, -1, 2, 2, 7, -13],
-               [-1, 1, 4, -2, 1, -1, 11],
-               [3, -1, 2, 5, -2, 1, 0],
-               [1, 0, 1, 0, 4, -2, 19],
-               [0, 2, -3, 1, 1, 5, -15]]
-    
-    system(matrix6)
-    
-    matrix7 = []
-
-    system(matrix7)
+    system(matrix)
 
 
 def REF(matrix):
@@ -121,6 +81,7 @@ def RREF(matrix):
 def system(matrix):
     print("Original Matrix: ")
     display(matrix)
+    plot_matrix = list(matrix)
     REF(matrix)
     REF_1(matrix)
     RREF(matrix)
@@ -138,11 +99,15 @@ def system(matrix):
         if non_zero_rows == num_vars:
             for i in range(len(matrix[0])-1):
                 print(f"The variable X{i+1} = {matrix[i][-1]:.4f}.")
-            print()
+            if len(matrix) == 2 and len(matrix[0]) == 3:
+                line_plot(plot_matrix, matrix) 
+            else:
+                pass
+            
         else:
             print("The system has infinite many solutions. (Logic Pending)\n")
     else:
-        print("System is inconsistent. Solution not possible.\n")
+        print("System is inconsistent. Solution not possible.\nPlot not available.\n")
 
 
 def check_consistent(matrix):
@@ -172,17 +137,34 @@ def display(matrix):
 def matrix_input():
     # INPUT from user--->
     p = int(input("How many equations? "))
-    n = int(input("How many unknowns? "))
+    n = int(input("How many variables? ")) + 1
     matrix = []
     print()
     for i in range(p):
         row = []
         for j in range(n):
-            row.append(float(input(f"Enter entry # {i+1}{j+1}: ")))
+            if not j == n-1:
+                row.append(float(input(f"Enter entry # {i+1}{j+1}: ")))
+            else:
+                row.append(float(input(f"Enter constant # {i+1} / entry # {i+1}{j+1}: ")))
         matrix.append(row)
         print()
     return matrix
 
+
+def line_plot(matrix, rref):
+    x = np.linspace(rref[0][2] - 10, rref[0][2] + 10, 100)
+    y1 = (matrix[0][2] - matrix[0][0] * x) / matrix[0][1]
+    y2 = (matrix[1][2] - matrix[1][0] * x) / matrix[1][1]
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(x, y1, label=f"y1 = {matrix[0][2] / matrix[0][1]} - {matrix[0][0] / matrix[0][1]}  x", color='blue') 
+    plt.plot(x, y2, label=f"y2 = {matrix[1][2] / matrix[1][1]} - {matrix[1][0] / matrix[0][1]}  x", color='red')
+    plt.grid(True, ls=":")
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.legend()
+    plt.show()
 
 
 main()
