@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matrix-solver-ref"
+version = "0.1.0"
+authors = [
+  { name="Batool Zafar", email="batoolzafar24@gmail.com" },
+  { name="Muhammad Hashim", email="muhammadhashimnaeem16@gmail.com" },
+]
+description = "A simple matrix solver for calculating REF and RREF"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy",
+    "matplotlib"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/batool-zafar123/REF"

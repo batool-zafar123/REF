@@ -151,8 +151,7 @@ def matrix_input():
         print()
     return matrix
 
-
-def line_plot(matrix, rref):
+def line_plot(rref, matrix):
     x = np.linspace(rref[0][2] - 10, rref[0][2] + 10, 100)
     y1 = (matrix[0][2] - matrix[0][0] * x) / matrix[0][1]
     y2 = (matrix[1][2] - matrix[1][0] * x) / matrix[1][1]
@@ -167,4 +166,5 @@ def line_plot(matrix, rref):
     plt.show()
 
 
-main()
+if __name__ == "__main__":
+    main()

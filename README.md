@@ -30,3 +30,20 @@ To run this script, ensure you have the following installed:
 2. Follow the prompts to enter the number of equations and variables.
 3. Input the coefficients row by row as requested.
 4. View the original matrix, the final RREF, and the calculated solution.
+
+
+## PYPI Module
+
+You can install this library using pip: `pip install matrix-solver-ref`
+
+```python
+import matrix_solver_ref
+
+matrix_solver_ref.main()
+```
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Contributing
+Feel free to contribute to this project!

@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+src/matrix_solver_ref.egg-info/PKG-INFO
+src/matrix_solver_ref.egg-info/SOURCES.txt
+src/matrix_solver_ref.egg-info/dependency_links.txt
+src/matrix_solver_ref.egg-info/requires.txt
+src/matrix_solver_ref.egg-info/top_level.txt
+src/ref/__init__.py
+src/ref/core.py
