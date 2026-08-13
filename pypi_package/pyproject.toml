@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "matrix-solver-ref"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Batool Zafar", email="batoolzafar24@gmail.com" },
   { name="Muhammad Hashim", email="muhammadhashimnaeem16@gmail.com" },
@@ -24,3 +24,4 @@ dependencies = [
 
 [project.urls]
 "Homepage" = "https://github.com/batool-zafar123/REF"
+"Documentation" = "https://matrix-solver-ref.vercel.app/"

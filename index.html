@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Solver REF | Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="cursor-glow"></div>
+    <nav class="navbar hidden-onload fade-in-up">
+        <div class="nav-content">
+            <div class="logo">matrix_solver_ref</div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#usage">Usage</a>
+                <a href="#about-us">About Us</a>
+                <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                    <svg id="moon-icon" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg id="sun-icon" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content hidden-onload fade-in-up" style="transition-delay: 0.1s;">
+            <div class="badge">v0.1.0 Released</div>
+            <h1 class="hero-title">Linear System Solver</h1>
+            <p class="hero-subtitle">A straightforward, elegant way to solve systems of linear equations using Gaussian Elimination and Gauss-Jordan Elimination.</p>
+            
+            <div class="install-card">
+                <div class="terminal-header">
+                    <span class="dot close"></span>
+                    <span class="dot minimize"></span>
+                    <span class="dot expand"></span>
+                </div>
+                <div class="terminal-body">
+                    <span class="prompt">$</span> <span class="command">pip install matrix-solver-ref</span>
+                    <button class="copy-btn" id="copy-install" aria-label="Copy to clipboard">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="hero-actions">
+                <a href="#usage" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/batool-zafar123/REF" target="_blank" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="how-it-works" class="section scroll-animate fade-in-up">
+            <div class="section-content">
+                <h2 class="section-title">How It Works</h2>
+                <div class="grid-steps">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <h3>Input</h3>
+                        <p>Define the number of equations and variables, then enter the coefficients and constants for your system.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <h3>Row Echelon Form</h3>
+                        <p>Converts the matrix into REF by identifying pivots and eliminating entries below them.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <h3>Normalization</h3>
+                        <p>Each pivot is precisely normalized to 1 to simplify the system.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">04</div>
+                        <h3>Reduced REF</h3>
+                        <p>Performs back-substitution to eliminate entries above the pivots, resulting in the final RREF matrix.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section scroll-animate fade-in-up">
+            <div class="section-content">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Automated Calculation</h3>
+                            <p>Handles all complex row operations (swapping, elimination, and scaling) automatically under the hood.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Visual Representation</h3>
+                            <p>For 2x3 systems, it leverages <code>matplotlib</code> to elegantly plot lines and visually demonstrate intersection points.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Numerical Precision</h3>
+                            <p>Implements a strict <code>1e-9</code> tolerance check to safeguard against floating-point inaccuracies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="usage" class="section scroll-animate fade-in-up">
+            <div class="section-content">
+                <h2 class="section-title">Usage & Examples</h2>
+                
+                <div class="code-showcase">
+                    <div class="code-tabs">
+                        <button class="tab active" data-target="code-programmatic">Programmatic Usage</button>
+                        <button class="tab" data-target="code-interactive">Interactive Mode</button>
+                    </div>
+                    <div class="code-blocks">
+                        <div id="code-programmatic" class="code-block active">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Define your matrix (e.g. 2 equations, 3 variables/constants)</span>
+<span class="comment"># Each row represents an equation, and the last element is the constant.</span>
+my_matrix = [
+    [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>],
+    [<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]
+]
+
+<span class="comment"># Run the solver on your matrix</span>
+msr.system(my_matrix)</code></pre>
+                        </div>
+                        <div id="code-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Launch the interactive terminal prompt</span>
+<span class="comment"># You will be prompted to enter equations step-by-step</span>
+msr.main()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-us" class="section scroll-animate fade-in-up">
+            <div class="section-content">
+                <h2 class="section-title">About Us</h2>
+                <p class="about-intro">We are passionate developers building elegant mathematical tools for the Python ecosystem.</p>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">BZ</div>
+                        <h3>Batool Zafar</h3>
+                        <p class="role">Author & Debugger</p>
+                        <p class="bio">"A mathematician at heart, I enjoy transforming complex numerical concepts into clean, accessible code. This project is a testament to my belief that mathematics should be both powerful and intuitive."</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">MH</div>
+                        <h3>Muhammad Hashim</h3>
+                        <p class="role">Co-Author & Maintainer</p>
+                        <p class="bio">"As a software engineer, I believe in writing clean, efficient, and maintainable code. I am passionate about building tools that help others solve complex problems."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="logo">matrix_solver_ref</span>
+                <p>Released under the MIT License.</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://pypi.org/project/matrix-solver-ref/" target="_blank">PyPI Package</a>
+                <a href="https://github.com/batool-zafar123/REF" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" class="scroll-top-btn" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

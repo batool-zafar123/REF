@@ -81,7 +81,7 @@ def RREF(matrix):
 def system(matrix):
     print("Original Matrix: ")
     display(matrix)
-    plot_matrix = list(matrix)
+    plot_matrix = [row[:] for row in matrix]
     REF(matrix)
     REF_1(matrix)
     RREF(matrix)
@@ -100,7 +100,7 @@ def system(matrix):
             for i in range(len(matrix[0])-1):
                 print(f"The variable X{i+1} = {matrix[i][-1]:.4f}.")
             if len(matrix) == 2 and len(matrix[0]) == 3:
-                line_plot(plot_matrix, matrix) 
+                line_plot(matrix, plot_matrix) 
             else:
                 pass
             
