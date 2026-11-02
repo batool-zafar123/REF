@@ -18,6 +18,7 @@
             <div class="nav-links">
                 <a href="#how-it-works">How It Works</a>
                 <a href="#features">Features</a>
+                <a href="#functions">Functions API</a>
                 <a href="#usage">Usage</a>
                 <a href="#about-us">About Us</a>
                 <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
@@ -119,35 +120,329 @@
             </div>
         </section>
 
+        <section id="functions" class="section scroll-animate fade-in-up">
+            <div class="section-content">
+                <h2 class="section-title">Functions Reference</h2>
+                <p class="about-intro">Simple, intuitive functions designed for beginners. Call any function with your data directly, or call it without arguments to launch a guided terminal prompt.</p>
+
+                <div class="functions-container">
+                    <!-- Function 1: to_ref -->
+                    <div class="function-card">
+                        <div class="function-header">
+                            <div class="function-title-group">
+                                <h3 class="function-title">to_ref<span style="color: var(--text-secondary);">(matrix=None, show_steps=False)</span></h3>
+                                <span class="badge-tag highlight">Gaussian Elimination</span>
+                                <span class="badge-tag">Returns list[list]</span>
+                            </div>
+                        </div>
+                        <p class="function-desc">Transforms any 2D matrix into Row Echelon Form (REF). Identifies pivots column by column, performs row swaps, and eliminates entries beneath each pivot.</p>
+                        
+                        <div class="function-details-grid">
+                            <div class="detail-block">
+                                <h4>Parameters</h4>
+                                <ul>
+                                    <li><code>matrix</code>: Nested list or 2D array. If omitted, prompts for dimensions & entries.</li>
+                                    <li><code>show_steps</code>: <em>bool (default False)</em>. Prints formatted matrices before and after conversion.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Interactive Prompt</h4>
+                                <ul>
+                                    <li>Prompts for total rows and total columns.</li>
+                                    <li>Asks for each element individually: <code>Enter entry [r, c]:</code></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <div class="code-tabs">
+                                <button class="tab active" data-target="to-ref-prog">Programmatic Usage</button>
+                                <button class="tab" data-target="to-ref-interactive">Interactive Terminal</button>
+                            </div>
+                            <div class="code-blocks">
+                                <div id="to-ref-prog" class="code-block active">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+matrix = [
+    [<span class="number">2.0</span>, <span class="number">1.0</span>, -<span class="number">1.0</span>],
+    [-<span class="number">3.0</span>, -<span class="number">1.0</span>, <span class="number">2.0</span>],
+    [-<span class="number">2.0</span>, <span class="number">1.0</span>, <span class="number">2.0</span>]
+]
+
+<span class="comment"># Converts to REF and returns the result as a new list</span>
+ref_matrix = msr.<span class="function">to_ref</span>(matrix, <span class="param">show_steps</span>=<span class="keyword">True</span>)
+<span class="function">print</span>(ref_matrix)</code></pre>
+                                </div>
+                                <div id="to-ref-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Call without arguments to enter matrix interactively:</span>
+ref_matrix = msr.<span class="function">to_ref</span>()</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Function 2: to_rref -->
+                    <div class="function-card">
+                        <div class="function-header">
+                            <div class="function-title-group">
+                                <h3 class="function-title">to_rref<span style="color: var(--text-secondary);">(matrix=None, show_steps=False)</span></h3>
+                                <span class="badge-tag highlight">Gauss-Jordan Elimination</span>
+                                <span class="badge-tag">Returns list[list]</span>
+                            </div>
+                        </div>
+                        <p class="function-desc">Transforms any matrix into Reduced Row Echelon Form (RREF). Normalizes leading pivot entries to 1 and performs back-substitution to eliminate entries both above and below each pivot.</p>
+                        
+                        <div class="function-details-grid">
+                            <div class="detail-block">
+                                <h4>Parameters</h4>
+                                <ul>
+                                    <li><code>matrix</code>: Nested list or 2D array. If omitted, prompts for matrix input.</li>
+                                    <li><code>show_steps</code>: <em>bool (default False)</em>. Prints matrices at each stage.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Interactive Prompt</h4>
+                                <ul>
+                                    <li>Asks for matrix dimensions (rows and columns).</li>
+                                    <li>Prompts for each entry row by row.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <div class="code-tabs">
+                                <button class="tab active" data-target="to-rref-prog">Programmatic Usage</button>
+                                <button class="tab" data-target="to-rref-interactive">Interactive Terminal</button>
+                            </div>
+                            <div class="code-blocks">
+                                <div id="to-rref-prog" class="code-block active">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+matrix = [
+    [<span class="number">1.0</span>, <span class="number">2.0</span>],
+    [<span class="number">3.0</span>, <span class="number">4.0</span>]
+]
+
+rref_matrix = msr.<span class="function">to_rref</span>(matrix, <span class="param">show_steps</span>=<span class="keyword">True</span>)
+<span class="function">print</span>(rref_matrix)</code></pre>
+                                </div>
+                                <div id="to-rref-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Guides you through entering rows & columns:</span>
+rref_matrix = msr.<span class="function">to_rref</span>()</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Function 3: solve_system -->
+                    <div class="function-card">
+                        <div class="function-header">
+                            <div class="function-title-group">
+                                <h3 class="function-title">solve_system<span style="color: var(--text-secondary);">(matrix=None, plot=False, show_steps=True)</span></h3>
+                                <span class="badge-tag highlight">Linear Equation Solver</span>
+                                <span class="badge-tag">Returns dict | None</span>
+                            </div>
+                        </div>
+                        <p class="function-desc">Solves a system of linear equations from an augmented matrix [A | B]. Returns a dictionary of variable values (e.g. <code>{"X1": 1.0, "X2": 2.0}</code>), detects inconsistent or infinite systems, and can automatically plot 2D systems.</p>
+                        
+                        <div class="function-details-grid">
+                            <div class="detail-block">
+                                <h4>Parameters</h4>
+                                <ul>
+                                    <li><code>matrix</code>: Augmented matrix where the last column contains constants.</li>
+                                    <li><code>plot</code>: <em>bool (default False)</em>. Plots lines visually for 2x3 systems.</li>
+                                    <li><code>show_steps</code>: <em>bool (default True)</em>. Prints formatted steps and results.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Interactive Prompt</h4>
+                                <ul>
+                                    <li>Asks: <code>How many equations?</code> and <code>How many variables?</code></li>
+                                    <li>Explicitly requests coefficients and then constants for each equation.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <div class="code-tabs">
+                                <button class="tab active" data-target="solve-prog">Programmatic Usage</button>
+                                <button class="tab" data-target="solve-interactive">Interactive Terminal</button>
+                            </div>
+                            <div class="code-blocks">
+                                <div id="solve-prog" class="code-block active">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># System: 1x + 2y = 5,  3x + 4y = 11</span>
+augmented = [
+    [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">5.0</span>],
+    [<span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">11.0</span>]
+]
+
+solution = msr.<span class="function">solve_system</span>(augmented, <span class="param">plot</span>=<span class="keyword">True</span>)
+<span class="function">print</span>(solution)  <span class="comment"># {'X1': 1.0, 'X2': 2.0}</span></code></pre>
+                                </div>
+                                <div id="solve-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Prompts for equations, variables, coefficients, and constants:</span>
+solution = msr.<span class="function">solve_system</span>()</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Function 4: is_consistent -->
+                    <div class="function-card">
+                        <div class="function-header">
+                            <div class="function-title-group">
+                                <h3 class="function-title">is_consistent<span style="color: var(--text-secondary);">(matrix=None, verbose=True)</span></h3>
+                                <span class="badge-tag highlight">System Analysis</span>
+                                <span class="badge-tag">Returns bool</span>
+                            </div>
+                        </div>
+                        <p class="function-desc">Quickly determines whether a system of linear equations is consistent (has at least one unique or infinite solution) or inconsistent (e.g. leads to an impossible row like 0 = 5).</p>
+                        
+                        <div class="function-details-grid">
+                            <div class="detail-block">
+                                <h4>Parameters</h4>
+                                <ul>
+                                    <li><code>matrix</code>: Augmented linear system matrix [A | B].</li>
+                                    <li><code>verbose</code>: <em>bool (default True)</em>. Prints whether the system is consistent.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Interactive Prompt</h4>
+                                <ul>
+                                    <li>Prompts for number of equations and variables.</li>
+                                    <li>Collects equation entries and constants.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <div class="code-tabs">
+                                <button class="tab active" data-target="consistent-prog">Programmatic Usage</button>
+                                <button class="tab" data-target="consistent-interactive">Interactive Terminal</button>
+                            </div>
+                            <div class="code-blocks">
+                                <div id="consistent-prog" class="code-block active">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Inconsistent system: x + 2y = 5, 2x + 4y = 12</span>
+system = [
+    [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">5.0</span>],
+    [<span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">12.0</span>]
+]
+
+status = msr.<span class="function">is_consistent</span>(system)
+<span class="function">print</span>(status)  <span class="comment"># False</span></code></pre>
+                                </div>
+                                <div id="consistent-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Interactively check any system:</span>
+status = msr.<span class="function">is_consistent</span>()</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Function 5: plot_system -->
+                    <div class="function-card">
+                        <div class="function-header">
+                            <div class="function-title-group">
+                                <h3 class="function-title">plot_system<span style="color: var(--text-secondary);">(matrix=None)</span></h3>
+                                <span class="badge-tag highlight">2D Visualization</span>
+                                <span class="badge-tag">Matplotlib Plot</span>
+                            </div>
+                        </div>
+                        <p class="function-desc">Renders an interactive 2D graph of 2 linear equations with 2 variables. Shows line equations, handles vertical lines gracefully, and highlights the exact solution point.</p>
+                        
+                        <div class="function-details-grid">
+                            <div class="detail-block">
+                                <h4>Parameters</h4>
+                                <ul>
+                                    <li><code>matrix</code>: 2x3 augmented matrix representing 2 equations and constants.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Interactive Prompt</h4>
+                                <ul>
+                                    <li>Asks specifically for coefficients of X, Y, and constant for line 1.</li>
+                                    <li>Asks specifically for coefficients of X, Y, and constant for line 2.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <div class="code-tabs">
+                                <button class="tab active" data-target="plot-prog">Programmatic Usage</button>
+                                <button class="tab" data-target="plot-interactive">Interactive Terminal</button>
+                            </div>
+                            <div class="code-blocks">
+                                <div id="plot-prog" class="code-block active">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+matrix_2d = [
+    [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">5.0</span>],
+    [<span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">11.0</span>]
+]
+
+msr.<span class="function">plot_system</span>(matrix_2d)</code></pre>
+                                </div>
+                                <div id="plot-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Prompts specifically for 2 lines and plots immediately:</span>
+msr.<span class="function">plot_system</span>()</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="usage" class="section scroll-animate fade-in-up">
             <div class="section-content">
-                <h2 class="section-title">Usage & Examples</h2>
+                <h2 class="section-title">Quick Start</h2>
                 
                 <div class="code-showcase">
                     <div class="code-tabs">
-                        <button class="tab active" data-target="code-programmatic">Programmatic Usage</button>
-                        <button class="tab" data-target="code-interactive">Interactive Mode</button>
+                        <button class="tab active" data-target="code-quick-solve">Solve System</button>
+                        <button class="tab" data-target="code-quick-rref">Compute RREF</button>
+                        <button class="tab" data-target="code-quick-interactive">Interactive Mode</button>
                     </div>
                     <div class="code-blocks">
-                        <div id="code-programmatic" class="code-block active">
+                        <div id="code-quick-solve" class="code-block active">
 <pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
 
-<span class="comment"># Define your matrix (e.g. 2 equations, 3 variables/constants)</span>
-<span class="comment"># Each row represents an equation, and the last element is the constant.</span>
-my_matrix = [
-    [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>],
-    [<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]
+<span class="comment"># 1. Define augmented matrix [A | B]</span>
+system = [
+    [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">5.0</span>],
+    [<span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">11.0</span>]
 ]
 
-<span class="comment"># Run the solver on your matrix</span>
-msr.system(my_matrix)</code></pre>
+<span class="comment"># 2. Solve and plot</span>
+solution = msr.<span class="function">solve_system</span>(system, <span class="param">plot</span>=<span class="keyword">True</span>)
+<span class="function">print</span>(<span class="string">"Solutions:"</span>, solution)</code></pre>
                         </div>
-                        <div id="code-interactive" class="code-block">
+                        <div id="code-quick-rref" class="code-block">
 <pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
 
-<span class="comment"># Launch the interactive terminal prompt</span>
-<span class="comment"># You will be prompted to enter equations step-by-step</span>
-msr.main()</code></pre>
+<span class="comment"># Convert any matrix directly to RREF</span>
+rref = msr.<span class="function">to_rref</span>([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]], <span class="param">show_steps</span>=<span class="keyword">True</span>)
+<span class="function">print</span>(rref)</code></pre>
+                        </div>
+                        <div id="code-quick-interactive" class="code-block">
+<pre><code><span class="keyword">import</span> matrix_solver_ref <span class="keyword">as</span> msr
+
+<span class="comment"># Launch full interactive wizard</span>
+msr.<span class="function">main</span>()</code></pre>
                         </div>
                     </div>
                 </div>

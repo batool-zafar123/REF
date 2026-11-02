@@ -34,32 +34,42 @@ document.addEventListener('DOMContentLoaded', () => {
         cursorGlow.style.top = e.clientY + 'px';
     });
 
-    // Code Tabs Logic
-    const tabs = document.querySelectorAll('.tab');
-    const codeBlocks = document.querySelectorAll('.code-block');
+    // Code Tabs Logic (scoped to container)
+    document.querySelectorAll('.code-showcase').forEach(showcase => {
+        const tabs = showcase.querySelectorAll('.tab');
+        const codeBlocks = showcase.querySelectorAll('.code-block');
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active class from all
-            tabs.forEach(t => t.classList.remove('active'));
-            codeBlocks.forEach(c => c.classList.remove('active'));
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                codeBlocks.forEach(c => c.classList.remove('active'));
 
-            // Add active class to clicked
-            tab.classList.add('active');
-            const targetId = tab.getAttribute('data-target');
-            document.getElementById(targetId).classList.add('active');
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                const targetBlock = showcase.querySelector(`#${targetId}`);
+                if (targetBlock) {
+                    targetBlock.classList.add('active');
+                }
+            });
         });
     });
 
-    // Copy to Clipboard Logic
-    const copyBtn = document.getElementById('copy-install');
-    copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText('pip install matrix-solver-ref').then(() => {
-            const originalHTML = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#27c93f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalHTML;
-            }, 2000);
+    // Universal Copy to Clipboard Logic
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            let textToCopy = btn.getAttribute('data-copy');
+            if (!textToCopy) {
+                const parent = btn.closest('.terminal-body, .install-card, .code-block, .code-showcase');
+                const codeEl = parent ? parent.querySelector('.command, code, pre') : null;
+                textToCopy = codeEl ? codeEl.innerText.trim() : 'pip install matrix-solver-ref';
+            }
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#27c93f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            });
         });
     });
 

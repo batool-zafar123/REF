@@ -1,49 +1,110 @@
-# Linear System Solver
+# Linear System Solver (`matrix-solver-ref`)
 
-This tool provides a straightforward way to solve systems of linear equations using **Gaussian Elimination** and **Gauss-Jordan Elimination** to transform a matrix into **Reduced Row Echelon Form (RREF)**.
+This tool provides a straightforward, beginner-friendly way to solve systems of linear equations and perform matrix operations using **Gaussian Elimination** and **Gauss-Jordan Elimination** to transform matrices into **Row Echelon Form (REF)** and **Reduced Row Echelon Form (RREF)**.
 
-## How It Works
-The program processes your input using the following logical steps:
+Available as both a standalone script and a pip-installable module with beginner-tailored functions.
 
-1.  **Input:** You define the number of equations and variables, then enter the coefficients and constants for your system.
-2.  **Row Echelon Form (REF):** The program converts the matrix into REF by identifying pivots and eliminating entries below them.
-3.  **Normalization:** Each pivot is normalized to 1.
-4.  **Reduced Row Echelon Form (RREF):** The program performs back-substitution to eliminate entries above the pivots, resulting in the final RREF matrix.
-5.  **Consistency Check:** It analyzes the final matrix to determine if the system is:
-    * **Consistent:** If the system has a solution (unique or infinite).
-    * **Inconsistent:** If the system has no solution (e.g., a row like `[0 0 ... 5]`).
+---
+
+## Installation
+
+Install directly from PyPI:
+```bash
+pip install matrix-solver-ref
+```
+
+---
+
+## Functions Reference
+
+Import as either `matrix_solver_ref` or `ref`:
+
+```python
+import matrix_solver_ref as msr  # or: import ref as msr
+```
+
+### 1. `to_ref(matrix=None, show_steps=False)`
+Converts any matrix into Row Echelon Form (REF).
+* If `matrix` is omitted, prompts interactively for rows, columns, and elements.
+* Returns a new matrix without mutating original input.
+
+```python
+mat = [[2, 1, -1], [-3, -1, 2], [-2, 1, 2]]
+ref_mat = msr.to_ref(mat, show_steps=True)
+```
+
+### 2. `to_rref(matrix=None, show_steps=False)`
+Converts any matrix into Reduced Row Echelon Form (RREF).
+* Scales pivots to 1 and eliminates entries both above and below pivots.
+
+```python
+mat = [[1, 2], [3, 4]]
+rref_mat = msr.to_rref(mat)
+```
+
+### 3. `solve_system(matrix=None, plot=False, show_steps=True)`
+Solves a linear system represented as an augmented matrix $[A | B]$.
+* In interactive mode (`solve_system()`), prompts for equations, variables, and constants.
+* Returns a dictionary of variable values (e.g., `{"X1": 1.0, "X2": 2.0}`), `"infinitely many solutions"`, or `None` if inconsistent.
+* Supports visual 2D line plotting for $2 \times 3$ systems when `plot=True`.
+
+```python
+system = [
+    [1.0, 2.0, 5.0],   # x + 2y = 5
+    [3.0, 4.0, 11.0]   # 3x + 4y = 11
+]
+solution = msr.solve_system(system, plot=True)
+print(solution)  # {'X1': 1.0, 'X2': 2.0}
+```
+
+### 4. `is_consistent(matrix=None, verbose=True)`
+Checks whether a linear system has solutions or is inconsistent ($0 = c$).
+* Returns `True` or `False`.
+
+```python
+inconsistent_system = [
+    [1.0, 2.0, 5.0],
+    [2.0, 4.0, 12.0]
+]
+print(msr.is_consistent(inconsistent_system))  # False
+```
+
+### 5. `plot_system(matrix=None)`
+Plots the 2 linear equations on a 2D Cartesian plane using `matplotlib` and marks the exact intersection solution.
+
+```python
+msr.plot_system([[1, 2, 5], [3, 4, 11]])
+```
+
+---
+
+## Standalone Script Usage
+
+You can also run the solver directly in your terminal:
+```bash
+python ref.py
+```
+Follow the interactive prompts to input equations and coefficients.
+
+---
 
 ## Key Features
-* **Automated Calculation:** Handles row operations (swapping, elimination, and scaling) automatically.
-* **Unique Solution Detection:** If the system is 2x3 (two variables), it automatically provides the specific values for the variables.
-* **Visual Representation:** If a 2x3 system is provided, the script uses `matplotlib` to plot the two lines, showing their intersection point visually.
-* **Numerical Precision:** Uses a small tolerance (`1e-9`) to handle floating-point inaccuracies, ensuring reliable results.
+* **Automated Row Operations:** Handles row swapping, elimination, and scaling automatically.
+* **Dual Interface:** Works programmatically in Python scripts and interactively in the terminal.
+* **2D Visualizations:** Built-in `matplotlib` integration for 2-variable systems.
+* **Numerical Precision:** Uses a small tolerance (`1e-9`) to prevent floating-point inaccuracies.
+
+---
 
 ## Prerequisites
-To run this script, ensure you have the following installed:
-* `python`
+* Python >= 3.7
 * `numpy`
 * `matplotlib`
 
-## Usage
-1. Run the script in your terminal/IDE.
-2. Follow the prompts to enter the number of equations and variables.
-3. Input the coefficients row by row as requested.
-4. View the original matrix, the final RREF, and the calculated solution.
-
-
-## PYPI Module
-
-You can install this library using pip: `pip install matrix-solver-ref`
-
-```python
-import matrix_solver_ref
-
-matrix_solver_ref.main()
-```
+---
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ## Contributing
-Feel free to contribute to this project!
+Feel free to open issues or contribute via pull requests!
